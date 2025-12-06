@@ -3,108 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kamar;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
-use Exception;
 
 class BarangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $barang = Barang::orderBy('name', 'asc')->get();
+        $search = $request->search;
+        $barangs = Barang::with('kamar')
+            ->when($search, function($q) use ($search){
+                $q->where('kodebarang','like',"%$search%")
+                  ->orWhere('keterangan','like',"%$search%")
+                  ->orWhereHas('kamar', fn($q2)=> $q2->where('nokamar','like',"%$search%"));
+            })
+            ->orderBy('tanggallaporan','desc')
+            ->paginate(10);
 
-        return view('barang.barang', [
-            'barang' => $barang
-        ]);
+        return view('barangs.index', compact('barangs','search'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('barang.barang-add');
+        $kamars = Kamar::all();
+        return view('barangs.create', compact('kamars'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:100|unique:barangs',
-            'category' => 'required',
-            'supplier' => 'required',
-            'stock' => 'required',
-            'price' => 'required',
-            'note' => 'max:1000',
+        $request->validate([
+            'kodebarang'=>'required|unique:barangs,kodebarang',
+            'nokamar'=>'required|exists:kamars,nokamar',
+            'keterangan'=>'nullable',
+            'tanggallaporan'=>'nullable|date',
+            'harga'=>'required|numeric',
+            'status'=>'required',
         ]);
 
-        $barang = Barang::create($request->all());
-
-        Alert::success('Success', 'Barang has been saved !');
-        return redirect('/barang');
+        Barang::create($request->all());
+        return redirect()->route('barangs.index')->with('success','Barang berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Barang $barang)
+    public function edit(Barang $barang)
     {
-        //
+        $kamars = Kamar::all();
+        return view('barangs.edit', compact('barang','kamars'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id_barang)
+    public function update(Request $request, Barang $barang)
     {
-        $barang = barang::findOrFail($id_barang);
-
-        return view('barang.barang-edit', [
-            'barang' => $barang,
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id_barang)
-    {
-        $validated = $request->validate([
-            'name' => 'required|max:100|unique:barangs,name,' . $id_barang . ',id_barang',
-            'category' => 'required',
-            'supplier' => 'required',
-            'stock' => 'required',
-            'price' => 'required',
-            'note' => 'max:1000',
+        $request->validate([
+            'nokamar'=>'required|exists:kamars,nokamar',
+            'keterangan'=>'nullable',
+            'tanggallaporan'=>'nullable|date',
+            'harga'=>'required|numeric',
+            'status'=>'required',
         ]);
 
-        $barang = Barang::findOrFail($id_barang);
-        $barang->update($validated);
-
-        Alert::info('Success', 'Barang has been updated !');
-        return redirect('/barang');
+        $barang->update($request->all());
+        return redirect()->route('barangs.index')->with('success','Barang berhasil diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id_barang)
+    public function destroy(Barang $barang)
     {
-        try {
-            $deletedbarang = Barang::findOrFail($id_barang);
-
-            $deletedbarang->delete();
-
-            Alert::error('Success', 'Barang has been deleted !');
-            return redirect('/barang');
-        } catch (Exception $ex) {
-            Alert::warning('Error', 'Cant deleted, Barang already used !');
-            return redirect('/barang');
-        }
+        $barang->delete();
+        return redirect()->route('barangs.index')->with('success','Barang berhasil dihapus');
     }
 }

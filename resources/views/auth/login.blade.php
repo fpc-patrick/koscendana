@@ -4,16 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title }} | Andis Dev </title>
+    <title>{{ $title }} | KostCendana </title>
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-    <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
 
     {{-- <link rel="stylesheet" href="/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css"> --}}
 
-    <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
 
 </head>
 
@@ -25,7 +25,7 @@
 
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="/" class="h1"><b>Andis</b> Dev</a>
+                <a href="/" class="h1"><b>Kost</b>Cendana</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -58,10 +58,10 @@
                         </div>
 
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Log In</button>
                         </div>
                         <p class="mb-0">
-                            <a href="/register" class="text-center">Register a new membership</a>
+                            <a href="/register" class="text-center">Register a new account</a>
                         </p>
                     </div>
                 </form>

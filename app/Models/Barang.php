@@ -9,9 +9,14 @@ class Barang extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_barang';
+    protected $primaryKey = 'kodebarang';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    protected $table = 'barangs';
+    protected $fillable = ['kodebarang','nokamar','keterangan','tanggallaporan','harga','status'];
 
-    protected $guarded = ['id_barang'];
+    // Relasi ke kamar
+    public function kamar() {
+        return $this->belongsTo(Kamar::class, 'nokamar', 'nokamar');
+    }
 }

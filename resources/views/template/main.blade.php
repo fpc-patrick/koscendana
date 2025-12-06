@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | Andis Dev</title>
+    <title>@yield('title') | KostCendana</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -39,7 +39,22 @@
                     <a href="/" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/" class="nav-link">Barang</a>
+                    <a href="/kamars" class="nav-link">Kamar</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/penghunis" class="nav-link">Penghuni</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/transaksis" class="nav-link">Transaksi</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/tagihans" class="nav-link">Tagihan</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/barangs" class="nav-link">Tabel Pengeluaran</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/pengaturansaldo" class="nav-link">Saldo Pemasukan</a>
                 </li>
             </ul>
 
@@ -178,7 +193,7 @@
             <a href="/dashboard" class="brand-link">
                 <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Andis Dev</span>
+                <span class="brand-text font-weight-light">KostCendana</span>
             </a>
 
             <!-- Sidebar -->
@@ -221,10 +236,51 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/barang" class="nav-link">
+                            <a href="/kamars" class="nav-link">
+                                <i class="nav-icon fa-solid fa-door-open"></i>
+                                <p>
+                                    Daftar Kamar
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/penghunis" class="nav-link">
+                                <i class="nav-icon fa-solid fa-user-group"></i>
+                                <p>
+                                    Daftar Penghuni
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/transaksis" class="nav-link">
+                                <i class="nav-icon fa-solid fa-money-bill-transfer"></i>
+                                <p>
+                                    Daftar Transaksi
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/tagihans" class="nav-link">
+                                <i class="nav-icon fa-solid fa-file-invoice-dollar"></i>
+                                <p>
+                                    Daftar Tagihan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/barangs" class="nav-link">
                                 <i class="nav-icon fa-solid fa-box"></i>
                                 <p>
-                                    Barang
+                                    Tabel Pengeluaran
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/pengaturansaldo" class="nav-link">
+                                <i class="nav-icon fa-solid fa-box"></i>
+                                <p>
+                                    Saldo Pemasukan
                                 </p>
                             </a>
                         </li>
@@ -267,8 +323,8 @@
 
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2023 <a href="https://andisdev.tech">Andis Dev</a>.</strong> All rights
-            reserved.
+            <strong>Alamat : Jl. Krakatau 2 No 11 A <a href="">KostPutriCendana</a>.</strong> No Hp : 081575014466
+            
         </footer>
     </div>
     <!-- ./wrapper -->
